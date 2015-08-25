@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <!-- Секция аппендеров -->
+    <Appenders>
+        <!-- Файловый аппендер -->
+        <RollingFile name="RollingFile" fileName="src/ru/fireway/endpoint/log/serverStat.log"
+                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %p %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+        <!-- Файловый аппендер
+        <File name="file2" fileName="log2.log">
+           <!- - Фильтр по маркеру - ->
+            <MarkerFilter marker="fileonly" onMatch="DENY" onMismatch="ACCEPT"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
+            </PatternLayout>
+        </File> -->
+    </Appenders>
+    <!-- Секция логгеров -->
+    <Loggers>
+        <!-- Корневой логгер -->
+        <Root level="trace">
+            <AppenderRef ref="RollingFile" level="INFO"/>
+        </Root>
+        <!-- Логгер нашего класса
+        <Logger name="logging.log4j.LoggingLog4j" level="info" additivity="false">
+            <AppenderRef ref="file2" level="INFO"/>
+        </Logger> -->
+    </Loggers>
+</Configuration> 
